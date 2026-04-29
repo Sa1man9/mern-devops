@@ -75,6 +75,7 @@ function App() {
       setTasks(response.data);
     } catch (err) {
       setError('Failed to fetch tasks. Please try again.');
+      console.log("err: ", err)
     } finally {
       setLoading(false);
     }

@@ -12,20 +12,32 @@ function App() {
   const [error, setError] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const fetchTasks = async () => {
-    try {
-      const response = await taskService.getAllTasks();
-      setTasks(response.data);
-    } catch (err) {
-      setError('Failed to fetch tasks. Please try again.');
-      console.error('Error fetching tasks:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   const fetchTasks = async () => {
+  //   try {
+  //     const response = await taskService.getAllTasks();
+  //     setTasks(response.data);
+  //   } catch (err) {
+  //     setError('Failed to fetch tasks. Please try again.');
+  //     console.error('Error fetching tasks:', err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // Fetch tasks on component mount
   useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await taskService.getAllTasks();
+        setTasks(response.data);
+      } catch (err) {
+        setError('Failed to fetch tasks. Please try again.');
+        console.error('Error fetching tasks:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchTasks();
   }, []);
 
@@ -54,10 +66,18 @@ function App() {
     }
   };
 
-  const handleRetry = () => {
+  const handleRetry = async () => {
     setLoading(true);
     setError(null);
-    fetchTasks();
+
+    try {
+      const response = await taskService.getAllTasks();
+      setTasks(response.data);
+    } catch (err) {
+      setError('Failed to fetch tasks. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // let sangam = 'unused variable here';

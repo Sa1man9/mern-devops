@@ -12,12 +12,7 @@ function App() {
   const [error, setError] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Fetch tasks on component mount
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
+    const fetchTasks = async () => {
     try {
       setLoading(true);
       setError(null);
@@ -30,6 +25,11 @@ function App() {
       setLoading(false);
     }
   };
+
+  // Fetch tasks on component mount
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const handleAddTask = async (taskData) => {
     try {

@@ -14,8 +14,6 @@ function App() {
 
     const fetchTasks = async () => {
     try {
-      setLoading(true);
-      setError(null);
       const response = await taskService.getAllTasks();
       setTasks(response.data);
     } catch (err) {
@@ -57,6 +55,8 @@ function App() {
   };
 
   const handleRetry = () => {
+    setLoading(true);
+    setError(null);
     fetchTasks();
   };
 
